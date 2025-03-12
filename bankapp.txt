@@ -1,0 +1,53 @@
+package BankApp;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class bankapp {
+  WebDriver driver;
+  @Test
+  public void Login() throws InterruptedException, AWTException {
+	  driver = new ChromeDriver();
+	  driver.manage().window().maximize();
+	  Thread.sleep(2000);
+	  driver.get("https://the-internet.herokuapp.com/basic_auth");
+	  Thread.sleep(2000);
+	// Create Robot instance
+      Robot robot = new Robot();
+      robot.delay(2000);
+
+      // Type "admin" as Username
+      typeText(robot, "admin");
+
+      // Press TAB to move to the Password field
+      robot.keyPress(KeyEvent.VK_TAB);
+      robot.keyRelease(KeyEvent.VK_TAB);
+      robot.delay(1000);
+
+      // Type "admin" as Password
+      typeText(robot, "admin");
+
+      // Press ENTER to submit
+      robot.keyPress(KeyEvent.VK_ENTER);
+      robot.keyRelease(KeyEvent.VK_ENTER); 
+
+
+	  
+  }
+private void typeText(Robot robot, String text) {
+	// TODO Auto-generated method stub
+	for (char c : text.toCharArray()) {
+        int keyCode = KeyEvent.getExtendedKeyCodeForChar(c);
+        robot.keyPress(keyCode);
+        robot.keyRelease(keyCode);
+        robot.delay(100);  // Small delay between keystrokes
+    }
+}
+}
